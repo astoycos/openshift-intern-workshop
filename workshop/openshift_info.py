@@ -25,7 +25,6 @@ class OpenShiftWorkshop(object):
         return self._get_running_pods(pod_list)
 
     def get_services(self):
-        def get_services(self):
         services_api = self.oapi_client.resources.get(
                             kind='Service',
                             api_version='v1')
@@ -47,7 +46,12 @@ class OpenShiftWorkshop(object):
         return [resource.metadata.name
                 for resource in resources.items]
 
-     def _get_running_pods(self, pods):
+    def _get_running_pods(self, pods):
         return [pod.metadata.name
                 for pod in pods.items
-                if pod.status.phase == "Running"]
+                if pod.status.phase == "Running"]def get_services(self):
+        services_api = self.oapi_client.resources.get(
+                            kind='Service',
+                            api_version='v1')
+        service_list = services_api.get(namespace=self.namespace)
+        return self._get_names(service_list)
